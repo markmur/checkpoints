@@ -34,6 +34,9 @@ const logPackageUpdate = message =>
   console.log(chalk`
 {bgCyan.bold Updating package} {white.bold ${message || ''}}`);
 
+const checkPackageExists = () =>
+  fs.pathExists(path.resolve(process.cwd(), 'package.json'));
+
 /**
  * Install dependencies with Yarn
  * @param  {Array} dependencies - an array of deps to install
@@ -84,6 +87,15 @@ const writeToPackage = async (key, config) => {
 };
 
 const main = async () => {
+  if (!(await checkPackageExists())) {
+    throw new Error(
+      chalk`{red.bold package.json file not found.
+
+Please ensure you're running checkpoints in a node project with a valid package.json file.
+      }`
+    );
+  }
+
   console.log(chalk`{magenta.bold CHECKPOINTS}`, '\n');
 
   const answers = await inquirer.prompt([
@@ -135,4 +147,8 @@ const main = async () => {
 };
 
 // Prompt the user
-main();
+try {
+  main();
+} catch (err) {
+  throw err;
+}
