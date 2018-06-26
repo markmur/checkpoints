@@ -25,3 +25,58 @@ npm install -g checkpoints
 ```sh
 checkpoints
 ```
+
+## Actions
+
+### xo
+
+[XO](https://github.com/xojs/xo) is a linter which sits on top of ESLint and abstracts much of the configuration.
+
+#### Config
+
+The following is the default config that will be added to your `package.json` file:
+
+```json
+"xo": {
+  "parser": "babel-eslint",
+  "envs": ["browser", "node"],
+  "prettier": true,
+  "space": true,
+  "rules": {
+    "camelcase": [
+      2,
+      {
+        "properties": "never"
+      }
+    ]
+  }
+}
+```
+
+#### Dependencies
+
+```
+xo
+babel-eslint
+eslint-config-xo
+```
+
+### xo-react
+
+The `xo-react` action adds everything from the `xo` action but configures it for React.
+
+### Config
+
+The following is added to the above `xo` configuration:
+
+```
+"extends": ["react"],
+"plugins": ["react"]
+```
+
+#### Dependencies
+
+```
+eslint-config-xo-react 
+eslint-plugin-react
+```
