@@ -5,7 +5,7 @@
   "preferGlobal": true,
   "main": "bin/checkpoints.js",
   "bin": {
-    "checkpoint": "bin/checkpoints.js"
+    "checkpoints": "bin/checkpoints.js"
   },
   "scripts": {
     "build": "rimraf dist && mkdir dist && babel src --out-dir dist",
