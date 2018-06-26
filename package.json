@@ -1,10 +1,13 @@
 {
-  "name": "checkpoint",
+  "name": "checkpoints",
   "private": "false",
   "version": "0.1.0",
   "description": "README.md",
   "preferGlobal": true,
   "main": "bin/checkpoint.js",
+  "bin": {
+    "checkpoint": "bin/checkpoints.js"
+  },
   "scripts": {
     "build": "rimraf dist && mkdir dist && babel src --out-dir dist",
     "lint-staged": "lint-staged",
@@ -14,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markmur/checkpoint.git"
+    "url": "git+https://github.com/markmur/checkpoints.git"
   },
   "keywords": [
     "xo",
@@ -30,9 +33,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/markmur/checkpoint/issues"
+    "url": "https://github.com/markmur/checkpoints/issues"
   },
-  "homepage": "https://github.com/markmur/checkpoint",
+  "homepage": "https://github.com/markmur/checkpoints",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
     "chalk": "^2.4.1",
