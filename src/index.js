@@ -18,7 +18,12 @@ const XO = 'xo';
 const XO_REACT = 'xo-react';
 const PRECOMMIT = 'precommit';
 
-const choices = [XO, XO_REACT, PRETTIER, PRECOMMIT];
+const choices = [
+  { name: XO, value: XO },
+  { name: XO_REACT, value: XO_REACT },
+  { name: PRETTIER, value: PRETTIER },
+  { name: `${PRECOMMIT} (Adds pre-commit and lint-staged)`, value: PRECOMMIT }
+];
 
 const logInstall = (dependencies, name = 'dependencies') =>
   console.log(chalk`
