@@ -2,23 +2,25 @@
 
 Add linting, code formatting and precommit checks to an existing project.
 
-<p align="center">
-  <img src="https://github.com/markmur/checkpoints/raw/master/img/checkpoints.png?raw=true" alt="Checkpoints" />
-</p>
+## Why?
+
+Adding linting, prettier and precommit checks multiple times a day to new/existing repos is no fun and often it can be difficult to recall the correct dependencies to install. This project aims to mitigate those problems.
+
+> Note: There are plans to add a `checkpoints config` action, which would allow users to specify their own `xo` and `prettier` configurations. For now though the project is limited to the configs specified below.
+
+## Things to Note
+
+This project uses `yarn` to install dependencies. There are plans in place to add the option to use NPM but for now it's limited to Yarn.
 
 ## Installation
-
-With `Yarn`:
 
 ```sh
 yarn add global checkpoints
 ```
 
-With `NPM`:
-
-```sh
-npm install -g checkpoints
-```
+<p align="center">
+  <img src="https://github.com/markmur/checkpoints/raw/master/img/checkpoints.png?raw=true" alt="Checkpoints" />
+</p>
 
 ## Usage
 
