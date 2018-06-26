@@ -28,7 +28,7 @@ yarn add global checkpoints
 checkpoints
 ```
 
-## Actions
+## Options
 
 - [xo](#xo)
 - [xo-react](#xo-react)
