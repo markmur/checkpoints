@@ -32,7 +32,7 @@ checkpoints
 
 [XO](https://github.com/xojs/xo) is a linter which sits on top of ESLint and abstracts much of the configuration.
 
-#### Config
+##### Config
 
 The following is the default config that will be added to your `package.json` file:
 
@@ -53,7 +53,7 @@ The following is the default config that will be added to your `package.json` fi
 }
 ```
 
-#### Dependencies
+##### Dependencies
 
 ```
 xo
@@ -67,7 +67,7 @@ eslint-config-xo
 
 The `xo-react` action adds everything from the `xo` action but configures it for React.
 
-### Config
+##### Config
 
 The following is added to the above `xo` configuration:
 
@@ -76,7 +76,7 @@ The following is added to the above `xo` configuration:
 "plugins": ["react"]
 ```
 
-#### Dependencies
+##### Dependencies
 
 ```
 eslint-config-xo-react 
@@ -87,11 +87,11 @@ eslint-plugin-react
 
 ### Prettier
 
-#### Config
+##### Config
 
 TODO
 
-#### Dependencies
+##### Dependencies
 
 ```
 prettier
@@ -105,7 +105,7 @@ eslint-config-prettier
 
 The `precommit` action uses `pre-commit` and `lint-staged` to lint your repo prior to git commits.
 
-#### Config
+##### Config
 
 ```json
 {
@@ -127,7 +127,7 @@ The `precommit` action uses `pre-commit` and `lint-staged` to lint your repo pri
 }
 ```
 
-#### Dependencies
+##### Dependencies
 
 ```
 lint-staged
