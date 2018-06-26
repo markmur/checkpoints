@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "README.md",
   "preferGlobal": true,
-  "main": "bin/checkpoint.js",
+  "main": "bin/checkpoints.js",
   "bin": {
     "checkpoint": "bin/checkpoints.js"
   },
