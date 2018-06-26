@@ -2,6 +2,10 @@
 
 Add linting, code formatting and precommit checks to an existing project.
 
+```
+yarn add -g checkpoints
+```
+
 ## Why?
 
 Adding linting, prettier and precommit checks multiple times a day to new/existing repos is no fun and often it can be difficult to recall the correct dependencies to install. This project aims to mitigate those problems.
