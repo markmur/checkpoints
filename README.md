@@ -28,6 +28,11 @@ checkpoints
 
 ## Actions
 
+- [xo](#xo)
+- [xo-react](#xo-react)
+- [prettier](#prettier)
+- [precommit](#precommit)
+
 ### xo
 
 [XO](https://github.com/xojs/xo) is a linter which sits on top of ESLint and abstracts much of the configuration.
