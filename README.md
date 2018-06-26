@@ -61,6 +61,8 @@ babel-eslint
 eslint-config-xo
 ```
 
+---
+
 ### xo-react
 
 The `xo-react` action adds everything from the `xo` action but configures it for React.
@@ -79,4 +81,55 @@ The following is added to the above `xo` configuration:
 ```
 eslint-config-xo-react 
 eslint-plugin-react
+```
+
+---
+
+### Prettier
+
+#### Config
+
+TODO
+
+#### Dependencies
+
+```
+prettier
+prettier-eslint
+eslint-config-prettier
+```
+
+---
+
+### Precommit
+
+The `precommit` action uses `pre-commit` and `lint-staged` to lint your repo prior to git commits.
+
+#### Config
+
+```json
+{
+  "scripts": {
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "git add",
+      "xo"
+    ]
+  },
+  "precommit": {
+    "run": [
+      "lint-staged"
+    ]
+  }
+}
+```
+
+#### Dependencies
+
+```
+lint-staged
+pre-commit
 ```
