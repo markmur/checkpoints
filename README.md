@@ -1,4 +1,4 @@
-# Checkpoints
+# 👮🏻 Checkpoints 👮🏻
 
 Add linting, code formatting and precommit checks to an existing project.
 
