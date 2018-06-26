@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "description": "README.md",
   "preferGlobal": true,
-  "main": "index.js",
+  "main": "bin/checkpoint.js",
   "scripts": {
     "build": "rimraf dist && mkdir dist && babel src --out-dir dist",
     "lint-staged": "lint-staged",
