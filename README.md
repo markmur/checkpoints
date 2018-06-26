@@ -89,7 +89,16 @@ eslint-plugin-react
 
 ##### Config
 
-TODO
+```json
+{
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true
+  }
+}
+```
 
 ##### Dependencies
 
