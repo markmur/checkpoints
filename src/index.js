@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs-extra');
+const ora = require('ora');
 const readPkg = require('read-pkg');
 const inquirer = require('inquirer');
 const yarn = require('yarn-api');
@@ -25,14 +26,8 @@ const choices = [
   { name: `${PRECOMMIT} (Adds pre-commit and lint-staged)`, value: PRECOMMIT }
 ];
 
-const logInstall = (dependencies, name = 'dependencies') =>
-  console.log(chalk`
-{bgGreen.bold Installing ${name}}
-{white.bold ${dependencies.join('\n')}}`);
-
-const logPackageUpdate = message =>
-  console.log(chalk`
-{bgCyan.bold Updating package} {white.bold ${message || ''}}`);
+const logAction = action =>
+  console.log(chalk`\n{magenta.bold.underline ${action}}`);
 
 const checkPackageExists = () =>
   fs.pathExists(path.resolve(process.cwd(), 'package.json'));
@@ -43,15 +38,24 @@ const checkPackageExists = () =>
  * @param  {Boolean} [dev=false] - set to true to add to devDependencies
  * @return {Promise} returns promise
  */
-const installDependencies = (dependencies, dev = false) => {
+const installDependencies = (dependencies, dev = true) => {
   return new Promise(resolve => {
-    yarn(['add', dev ? '--dev' : null, ...dependencies].filter(x => x), err => {
-      if (err) {
-        throw err;
-      }
+    yarn(
+      [
+        'add',
+        '--silent',
+        '--no-progress',
+        dev ? '--dev' : null,
+        ...dependencies
+      ].filter(x => x),
+      err => {
+        if (err) {
+          throw err;
+        }
 
-      return resolve();
-    });
+        return resolve();
+      }
+    );
   });
 };
 
@@ -63,8 +67,6 @@ const installDependencies = (dependencies, dev = false) => {
  */
 const writeToPackage = async (key, config) => {
   const pkg = await readPkg({ normalize: false });
-
-  logPackageUpdate();
 
   let updatedPackage = pkg;
 
@@ -84,6 +86,24 @@ const writeToPackage = async (key, config) => {
   const pathToPackage = path.resolve(process.cwd(), 'package.json');
 
   return fs.writeFile(pathToPackage, JSON.stringify(updatedPackage, null, 2));
+};
+
+const action = async ({ name, dependencies, tasks = [], successMessage }) => {
+  logAction(name);
+  const spinner = ora(name).start();
+  spinner.text = 'Installing dependencies';
+  await installDependencies(dependencies);
+  spinner.succeed(chalk`{white Installed all dependencies}`);
+
+  if (tasks.length > 0) {
+    spinner.text = 'Updating package.json';
+
+    tasks.map(async task => {
+      await task;
+    });
+  }
+
+  spinner.succeed(chalk`{white ${successMessage}}`);
 };
 
 const main = async () => {
@@ -114,34 +134,57 @@ Please ensure you're running checkpoints in a node project with a valid package.
   const { selected } = answers;
 
   if (selected.some(x => x === PRETTIER || x === XO || x === XO_REACT)) {
-    logInstall(common, 'common dependencies');
-    await installDependencies(common);
+    await action({
+      name: 'Common Dependencies',
+      dependencies: common,
+      tasks: [],
+      successMessage: 'Installed common dependencies'
+    });
   }
 
   // Prettier selected
   if (selected.includes(PRETTIER)) {
-    await installDependencies(prettier, true);
-    await writeToPackage('prettier', prettierConfig);
+    await action({
+      name: 'Prettier',
+      dependencies: prettier,
+      tasks: [writeToPackage('prettier', prettierConfig)],
+      successMessage: 'Added prettier config'
+    });
   }
 
   // XO selected
   if (selected.includes(XO) || selected.includes(XO_REACT)) {
-    await installDependencies(xo, true);
-    await writeToPackage('xo', xoConfig);
+    await action({
+      name: 'xo',
+      dependencies: xo,
+      tasks: [writeToPackage('xo', xoConfig)],
+      successMessage: 'Added xo config to package.json'
+    });
   }
 
   // XO with React selected
   if (selected.includes(XO_REACT)) {
-    await installDependencies(xoReact, true);
-    await writeToPackage('xo', xoReactConfig);
+    await action({
+      name: 'xo-react',
+      dependencies: xoReact,
+      tasks: [writeToPackage('xo', xoReactConfig)],
+      successMessage: 'Added xo-react config'
+    });
   }
 
   // Precommit selected
   if (selected.includes(PRECOMMIT)) {
-    await installDependencies(precommit, true);
-    await writeToPackage(null, precommitConfig);
-    await writeToPackage('scripts', {
-      'lint-staged': 'lint-staged'
+    await action({
+      name: 'Precommit',
+      dependencies: precommit,
+      tasks: [
+        writeToPackage(null, precommitConfig),
+        writeToPackage('scripts', {
+          'lint-staged': 'lint-staged'
+        })
+      ],
+      successMessage:
+        'Added lint-staged script, lint-staged config and precommit config'
     });
   }
 };
