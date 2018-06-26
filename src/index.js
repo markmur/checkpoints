@@ -84,13 +84,7 @@ const writeToPackage = async (key, config) => {
 };
 
 const main = async () => {
-  console.log(chalk`{magenta.bold CHECKPOINT}`, '\n');
-
-  const pkg = await readPkg();
-
-  if (!pkg) {
-    throw new Error('Please ensure you are running a node repo');
-  }
+  console.log(chalk`{magenta.bold CHECKPOINTS}`, '\n');
 
   const answers = await inquirer.prompt([
     {
