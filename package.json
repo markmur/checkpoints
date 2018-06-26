@@ -64,12 +64,6 @@
     "xo": "^0.21.1",
     "yarn": "^1.7.0"
   },
-  "prettier": {
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true
-  },
   "lint-staged": {
     "**/*.js": [
       "prettier --write",
@@ -98,5 +92,11 @@
         }
       ]
     }
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true
   }
 }
