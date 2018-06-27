@@ -98,9 +98,12 @@ const action = async ({ name, dependencies, tasks = [], successMessage }) => {
   if (tasks.length > 0) {
     spinner.text = 'Updating package.json';
 
-    tasks.map(async task => {
-      await task;
-    });
+    // Execute all tasks asynchronously
+    await Promise.all(
+      tasks.map(async task => {
+        await task;
+      })
+    );
   }
 
   spinner.succeed(chalk`{white ${successMessage}}`);
