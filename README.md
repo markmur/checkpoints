@@ -19,7 +19,7 @@ This project uses `yarn` to install dependencies. There are plans in place to ad
 ## Installation
 
 ```sh
-yarn add global checkpoints
+yarn add -g checkpoints
 ```
 
 <p align="center">
