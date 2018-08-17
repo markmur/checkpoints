@@ -60,12 +60,24 @@ const installDependencies = (dependencies, dev = true) => {
 };
 
 /**
+ * Run an array of tasks in sequence
+ * @param  {Array}  [funcs=[]] [description]
+ * @return {Array<Promises>} returns array of promise resolve
+ */
+const runSequence = (funcs = []) =>
+  funcs.reduce(
+    (promise, func) =>
+      promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([])
+  );
+
+/**
  * Write to package.json
  * @param  {String}  key - key in the package JSON object
  * @param  {Object}  config - the configuration to add
  * @return {Promise} returns promise
  */
-const writeToPackage = async (key, config) => {
+const writeToPackage = (key, config) => async () => {
   const pkg = await readPkg({ normalize: false });
 
   let updatedPackage = pkg;
@@ -98,9 +110,7 @@ const action = async ({ name, dependencies, tasks = [], successMessage }) => {
   if (tasks.length > 0) {
     spinner.text = 'Updating package.json';
 
-    tasks.map(async task => {
-      await task;
-    });
+    await runSequence(tasks);
   }
 
   spinner.succeed(chalk`{white ${successMessage}}`);
