@@ -3,7 +3,7 @@
 Add linting, code formatting and precommit checks to an existing project.
 
 ```
-yarn add -g checkpoints
+yarn global add checkpoints
 ```
 
 ## Why?
@@ -19,7 +19,7 @@ This project uses `yarn` to install dependencies. There are plans in place to ad
 ## Installation
 
 ```sh
-yarn add -g checkpoints
+yarn global add checkpoints
 ```
 
 <p align="center">
