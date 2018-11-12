@@ -1,8 +1,9 @@
 const prettierConfig = {
-  semi: true,
+  semi: false,
   singleQuote: true,
-  trailingComma: 'none',
-  bracketSpacing: true
+  trailingComma: 'all',
+  bracketSpacing: true,
+  proseWrap: 'always'
 };
 
 const xoConfig = {
@@ -11,12 +12,9 @@ const xoConfig = {
   prettier: true,
   space: true,
   rules: {
-    camelcase: [
-      2,
-      {
-        properties: 'never'
-      }
-    ]
+    camelcase: 0,
+    "unicorn/filename-case": 0,
+    "unicorn/no-process-exit": 0
   }
 };
 
